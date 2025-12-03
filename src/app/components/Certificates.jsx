@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import { ArrowDownTrayIcon, EyeIcon } from "@heroicons/react/24/outline";
 import { motion } from "framer-motion";
 import { useRef } from "react";
@@ -11,43 +11,47 @@ const certificates = [
     id: 1,
     name: "Docker",
     file: "/certificate/Docker.pdf",
-    image: "/cert-image/Docker.png",
+    image: "/cert-image/docker-cert.png",
   },
   {
     id: 2,
     name: "Kubernetes",
     file: "/certificate/Kubernetes.pdf",
-    image: "/cert-image/Kubernetes.png",
+    image: "/cert-image/kubernetes-cert.png",
   },
   {
     id: 3,
     name: "Helm",
     file: "/certificate/Helm.pdf",
-    image: "/cert-image/Helm.png",
+    image: "/cert-image/Helm-cert.png",
   },
   {
     id: 4,
     name: "Jenkins",
     file: "/certificate/Jenkins.pdf",
-    image: "/cert-image/Jenkins.png",
+    image: "/cert-image/jenkins-cert.png",
   },
   {
     id: 5,
     name: "Linux",
     file: "/certificate/Linux.pdf",
-    image: "/cert-image/Linux.png",
+    image: "/cert-image/Linux-cert.png",
   },
   {
     id: 6,
     name: "Shell Scripting",
     file: "/certificate/shell-scripting.pdf",
-    image: "/cert-image/shell-scripting.png",
+    image: "/cert-image/shell-scripting-cert.png",
   },
 ];
 
-const CertificateCard = ({ certificate }) => {
+const CertificateCard = ({ certificate, onView }) => {
   const handleView = () => {
-    window.open(certificate.file, "_blank");
+    if (onView) {
+      onView(certificate);
+    } else {
+      window.open(certificate.file, "_blank");
+    }
   };
 
   const handleDownload = () => {
@@ -108,6 +112,9 @@ const CertificateCard = ({ certificate }) => {
 const Certificates = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true });
+  const [selectedCertificate, setSelectedCertificate] = useState(null);
+
+  const closeModal = () => setSelectedCertificate(null);
 
   return (
     <section id="certificates" className="text-white py-8 px-4">
@@ -125,10 +132,44 @@ const Certificates = () => {
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
             transition={{ duration: 0.5, delay: index * 0.1 }}
           >
-            <CertificateCard certificate={certificate} />
+            <CertificateCard
+              certificate={certificate}
+              onView={setSelectedCertificate}
+            />
           </motion.div>
         ))}
       </div>
+
+      {selectedCertificate && (
+        <div
+          className="fixed inset-0 z-90 flex items-center justify-center bg-black/70 px-2"
+          onClick={closeModal}
+        >
+          <div
+            className="relative w-full max-w-3xl max-h-[90vh] bg-[#121212] border border-[#333] rounded-xl p-4 md:p-6 shadow-2xl shadow-black/60"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button
+              onClick={closeModal}
+              className="absolute top-1 right-1 text-gray-300 hover:text-white text-xl leading-none px-2 py-1 rounded-md hover:bg-white/10"
+              aria-label="Close"
+            >
+              ×
+            </button>
+            <div className="relative w-full h-[50vh] md:h-[60vh] bg-black rounded-lg overflow-hidden">
+              <Image
+                src={selectedCertificate.image}
+                alt={selectedCertificate.name}
+                fill
+                className="object-contain"
+              />
+            </div>
+            <p className="mt-4 text-center text-lg font-semibold text-white">
+              {selectedCertificate.name}
+            </p>
+          </div>
+        </div>
+      )}
     </section>
   );
 };
