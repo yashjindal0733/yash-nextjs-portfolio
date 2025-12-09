@@ -34,21 +34,21 @@ export const projectsData = [
     gitUrl: "https://github.com/naman995/suridhi",
     previewUrl: "https://suridhi.vercel.app/",
   },
+  // {
+  //   id: 4,
+  //   title: "User Management System",
+  //   description:
+  //     "A comprehensive user management system built with modern DevOps practices",
+  //   detailedDescription:
+  //     "This project demonstrates a complete user management system with automated CI/CD pipelines, containerization, and cloud deployment. The system includes user authentication, role-based access control, and real-time monitoring capabilities.",
+  //   image: "/images/projects/4.png",
+  //   tag: ["All", "Devops"],
+  //   gitUrl: "/",
+  //   previewUrl: "/",
+  //   videoUrl: "", // Add your video URL here
+  // },
   {
     id: 4,
-    title: "User Management System",
-    description:
-      "A comprehensive user management system built with modern DevOps practices",
-    detailedDescription:
-      "This project demonstrates a complete user management system with automated CI/CD pipelines, containerization, and cloud deployment. The system includes user authentication, role-based access control, and real-time monitoring capabilities.",
-    image: "/images/projects/4.png",
-    tag: ["All", "Devops"],
-    gitUrl: "/",
-    previewUrl: "/",
-    videoUrl: "", // Add your video URL here
-  },
-  {
-    id: 5,
     title: "3 Tier Architecture Application Deployment",
     description:
       "End-to-End Deployment of a Three-Tier Application on AWS EKS Cluster using GitOps",
@@ -83,7 +83,7 @@ Impact: Delivered a 99.9% deployment success rate, improved scalability, and red
     ], // Add image URLs here, e.g., ["/images/projects/5-1.png", "/images/projects/5-2.png"]
   },
   {
-    id: 6,
+    id: 5,
     title: "2 tier-python application",
     description: "Containerization of a Two-Tier Application using Docker, Docker Compose, and Image Scanning with Docker Scout",
     detailedDescription: `Upon completion of this project, learners can add the following description to their resumes:
